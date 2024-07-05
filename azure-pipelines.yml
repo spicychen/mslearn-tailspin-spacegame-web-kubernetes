@@ -51,7 +51,7 @@ stages:
 
 - stage: 'Deploy'
   displayName: 'Deploy the containers'
-  dependsOn: Build
+  # dependsOn: Build
   jobs:
   - deployment: Deploy
     displayName: Deploy
