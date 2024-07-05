@@ -20,6 +20,11 @@ stages:
       demands: 
       - agent.name -equals TestAgent2
     steps:
+    - script: 
+        echo: "local PAATH: $(Build.Repository.LocalPath)"
+        echo: "web RREpo: $(webRepository)"
+        echo: "dockerfile: $(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile"
+
     - task: Docker@2
       displayName: 'Build and push the image to container registry'
       inputs:
