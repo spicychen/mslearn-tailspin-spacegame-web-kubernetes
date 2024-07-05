@@ -66,19 +66,19 @@ stages:
               action: createSecret
               connectionType: azureResourceManager
               secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: 'Container Registry Connection'
-              azureSubscriptionConnection: 'HenryConnection'
-              azureResourceGroup: 'henryvoAKS'
-              kubernetesCluster: 'henri-private'
+              dockerRegistryEndpoint: 'TestNonProdContainerRegistryConnection'
+              azureSubscriptionConnection: 'TestNonProd KuCluCon'
+              azureResourceGroup: 'tailspin-space-game-rg'
+              kubernetesCluster: 'rick-test-17'
               namespace: 'default'
           - task: KubernetesManifest@1
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
               connectionType: azureResourceManager
-              azureSubscriptionConnection: 'HenryConnection'
-              azureResourceGroup: 'henryvoAKS'
-              kubernetesCluster: 'henri-private'
+              azureSubscriptionConnection: 'TestNonProd KuCluCon'
+              azureResourceGroup: 'tailspin-space-game-rg'
+              kubernetesCluster: 'rick-test-17'
               namespace: 'default'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
