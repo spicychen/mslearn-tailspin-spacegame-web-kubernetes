@@ -32,7 +32,7 @@ stages:
         command: buildAndPush
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
-        dockerfile: '$(Build.SourcesDirectory)\Tailspin.SpaceGame.Web\Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
         containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
@@ -42,11 +42,11 @@ stages:
         command: buildAndPush
         buildContext: $(Build.Repository.LocalPath)
         repository: $(leaderboardRepository)
-        dockerfile: '$(Build.SourcesDirectory)\Tailspin.SpaceGame.LeaderboardContainer\Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
         containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
-    - publish: '$(Build.SourcesDirectory)\manifests'
+    - publish: '$(Build.SourcesDirectory)/manifests'
       artifact: manifests
 
 - stage: 'Deploy'
