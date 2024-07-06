@@ -15,15 +15,19 @@ stages:
   - job: 'Build'
     displayName: 'Build job'
     pool:
-      # vmImage: 'ubuntu-20.04'
-      name: MaSelfAgentPool
-      demands: 
-      - agent.name -equals TestAgent2
+      vmImage: 'ubuntu-20.04'
+      # name: MaSelfAgentPool
+      # demands: 
+      # - agent.name -equals TestAgent2
     steps:
     - script: |
         echo "local PAATH: $(Build.Repository.LocalPath)"
         echo "web RREpo: $(webRepository)"
         echo "dockerfile: $(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile"
+        echo "tagu: $(tag)"
+        echo "ima sec: $(imagePullSecret)"
+        echo "pie spa: $(Pipeline.Workspace)"
+        echo "reg na: $(RegistryName)"
       displayName: "echo stuff"
 
     - task: Docker@2
@@ -32,7 +36,7 @@ stages:
         command: buildAndPush
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
-        dockerfile: '$(Build.SourcesDirectory)\Tailspin.SpaceGame.Web\Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
         containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
@@ -51,7 +55,7 @@ stages:
 
 - stage: 'Deploy'
   displayName: 'Deploy the containers'
-  # dependsOn: Build
+  dependsOn: Build
   jobs:
   - deployment: Deploy
     displayName: Deploy
